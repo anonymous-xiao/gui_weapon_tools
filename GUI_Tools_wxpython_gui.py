@@ -17,6 +17,9 @@ from init_frame import Frame
 from webShell.web_shell import WebShellModule
 from webShell.web_shell_button import WebShellButton
 from webShell.web_shell_events import WebShellEvents
+from codeReview.code_review import CodeReviewModule
+from codeReview.code_review_button import CodeReviewButton
+from codeReview.code_review_events import CodeReviewEvents
 
 
 class jar_management_gui(wx.Frame):
@@ -181,19 +184,9 @@ class jar_management_gui(wx.Frame):
 
         self.gui_all.Add(gui_scan, 0, wx.EXPAND | wx.ALL, 5)
 
-        # 代码审计添加---Sean
-
-        gui_code_reviewer = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"代码审计"), wx.VERTICAL)
-
-        code_review = wx.WrapSizer(wx.HORIZONTAL, wx.WRAPSIZER_DEFAULT_FLAGS)
-
-        self.seay = wx.Button(gui_code_reviewer.GetStaticBox(), wx.ID_ANY, u"Seay源代码审计系统", wx.DefaultPosition,
-                              wx.DefaultSize, 0)
-        code_review.Add(self.seay, 0, wx.ALL, 5)
-
-        gui_code_reviewer.Add(code_review, 1, wx.EXPAND, 5)
-
-        self.gui_all.Add(gui_code_reviewer, 0, wx.EXPAND | wx.ALL, 5)
+        # 代码审计
+        CodeReviewModule(u"代码审计").createModule(self, CodeReviewButton(u"Seay源代码审计系统-Win"),
+                                                   CodeReviewEvents(u"seay_click"))
 
         self.SetSizer(self.gui_all)
         self.Layout()
@@ -201,8 +194,6 @@ class jar_management_gui(wx.Frame):
         self.Centre(wx.BOTH)
 
         # Connect Events
-        # self.godzilla.Bind( wx.EVT_BUTTON, self.godzilla_click )
-        # self.behinder.Bind( wx.EVT_BUTTON, self.behinder_click )
         self.burp_suite.Bind(wx.EVT_BUTTON, self.burp_suite_click)
         self.cs.Bind(wx.EVT_BUTTON, self.cs_click)
         self.dirscan.Bind(wx.EVT_BUTTON, self.dirscan_click)
@@ -235,7 +226,6 @@ class jar_management_gui(wx.Frame):
         self.aliyun_accesskey.Bind(wx.EVT_BUTTON, self.aliyun_accesskey_click)
         self.AliyunAkTools.Bind(wx.EVT_BUTTON, self.aliyunakyools_click)
         self.mdut.Bind(wx.EVT_BUTTON, self.mdut_click)
-        self.seay.Bind(wx.EVT_BUTTON, self.seay_click)
 
     def __del__(self):
         pass
