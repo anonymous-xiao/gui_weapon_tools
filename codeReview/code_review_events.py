@@ -17,4 +17,4 @@ class CodeReviewEvents(Events):
         return switcher.get(value)
 
     def seay_click(self, event):
-        subprocess.Popen("cd gui_other/seay代码审计工具 && Seay源代码审计系统.exe", shell=True)
+        subprocess.Popen("cd tools/code_review/seay代码审计工具 && Seay源代码审计系统.exe", shell=True)

@@ -20,6 +20,12 @@ from webShell.web_shell_events import WebShellEvents
 from codeReview.code_review import CodeReviewModule
 from codeReview.code_review_button import CodeReviewButton
 from codeReview.code_review_events import CodeReviewEvents
+from monitor.monitor import MonitorModule
+from monitor.monitor_button import MonitorButton
+from monitor.monitor_events import MonitorEvents
+from penTest.pen import PenModule
+from penTest.pen_button import PenButton
+from penTest.pen_events import PenEvents
 
 
 class jar_management_gui(wx.Frame):
@@ -31,24 +37,28 @@ class jar_management_gui(wx.Frame):
 
         self.gui_all = wx.BoxSizer(wx.VERTICAL)
 
+        # WebShell管理工具
         WebShellModule(u"Webshell管理工具").createModule(self, WebShellButton(u"Godzilla_v3.03;Behinder"),
                                                          WebShellEvents(u"godzilla_click"))
+        # 渗透测试管理工具
+        PenModule(u"渗透工具").createModule(self, PenButton(u"Burpsuite_pro_v2022.1.1-All"),
+                                                    PenEvents(u"burp_suite_click"))
 
-        gui_other = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"渗透工具"), wx.VERTICAL)
+        # gui_other = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"渗透工具"), wx.VERTICAL)
+        #
+        # other = wx.WrapSizer(wx.HORIZONTAL, wx.WRAPSIZER_DEFAULT_FLAGS)
+        #
+        # self.burp_suite = wx.Button(gui_other.GetStaticBox(), wx.ID_ANY, u"BurpSuite_Pro_v2021.10.3",
+        #                             wx.DefaultPosition, wx.DefaultSize, 0)
+        # other.Add(self.burp_suite, 0, wx.ALL, 5)
 
-        other = wx.WrapSizer(wx.HORIZONTAL, wx.WRAPSIZER_DEFAULT_FLAGS)
+        # self.cs = wx.Button(gui_other.GetStaticBox(), wx.ID_ANY, u"Cobalt_Strike_v4.4", wx.DefaultPosition,
+        #                     wx.DefaultSize, 0)
+        # other.Add(self.cs, 0, wx.ALL, 5)
 
-        self.burp_suite = wx.Button(gui_other.GetStaticBox(), wx.ID_ANY, u"BurpSuite_Pro_v2021.10.3",
-                                    wx.DefaultPosition, wx.DefaultSize, 0)
-        other.Add(self.burp_suite, 0, wx.ALL, 5)
-
-        self.cs = wx.Button(gui_other.GetStaticBox(), wx.ID_ANY, u"Cobalt_Strike_v4.4", wx.DefaultPosition,
-                            wx.DefaultSize, 0)
-        other.Add(self.cs, 0, wx.ALL, 5)
-
-        gui_other.Add(other, 1, wx.EXPAND, 5)
-
-        self.gui_all.Add(gui_other, 0, wx.EXPAND | wx.ALL, 5)
+        # gui_other.Add(other, 1, wx.EXPAND, 5)
+        #
+        # self.gui_all.Add(gui_other, 0, wx.EXPAND | wx.ALL, 5)
 
         gui_shouji = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"信息收集"), wx.VERTICAL)
 
@@ -185,8 +195,14 @@ class jar_management_gui(wx.Frame):
         self.gui_all.Add(gui_scan, 0, wx.EXPAND | wx.ALL, 5)
 
         # 代码审计
+        # seayPHP代码审计
         CodeReviewModule(u"代码审计").createModule(self, CodeReviewButton(u"Seay源代码审计系统-Win"),
                                                    CodeReviewEvents(u"seay_click"))
+
+        # 监控
+        # mysql监控
+        MonitorModule(u"监控").createModule(self, MonitorButton(u"MySQLMonitor-1.1-All"),
+                                            MonitorEvents(u"mysql_monitor_click"))
 
         self.SetSizer(self.gui_all)
         self.Layout()
@@ -194,8 +210,6 @@ class jar_management_gui(wx.Frame):
         self.Centre(wx.BOTH)
 
         # Connect Events
-        self.burp_suite.Bind(wx.EVT_BUTTON, self.burp_suite_click)
-        self.cs.Bind(wx.EVT_BUTTON, self.cs_click)
         self.dirscan.Bind(wx.EVT_BUTTON, self.dirscan_click)
         self.webfinder.Bind(wx.EVT_BUTTON, self.webfinder_click)
         self.fofa.Bind(wx.EVT_BUTTON, self.fofa_click)
