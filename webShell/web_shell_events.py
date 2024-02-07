@@ -2,7 +2,9 @@ from button_click_event import Events
 import subprocess
 from setting import java8_path
 
-
+"""
+WebShell按钮点击事件
+"""
 class WebShellEvents(Events):
     def __init__(self, eventsName):
         super().__init__(eventsName)

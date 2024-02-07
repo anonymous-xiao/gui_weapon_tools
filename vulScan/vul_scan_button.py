@@ -1,9 +1,9 @@
 from init_button import Button
 
 """
-WebShell按钮
+漏洞扫描按钮
 """
-class WebShellButton(Button):
+class VulScanButton(Button):
     def __int__(self, buttonName):
         super().__init__(buttonName)
 

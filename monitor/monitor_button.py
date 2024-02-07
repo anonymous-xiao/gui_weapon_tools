@@ -1,9 +1,10 @@
 from init_button import Button
 
 """
-WebShell按钮
+监控按钮
 """
-class WebShellButton(Button):
+
+
+class MonitorButton(Button):
     def __int__(self, buttonName):
         super().__init__(buttonName)
-
